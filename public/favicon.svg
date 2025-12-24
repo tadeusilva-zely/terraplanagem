@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" rx="20" fill="#d97706"/>
+  <g fill="white">
+    <!-- Truck body -->
+    <rect x="15" y="45" width="50" height="25" rx="3"/>
+    <!-- Cabin -->
+    <rect x="50" y="35" width="20" height="35" rx="3"/>
+    <!-- Wheels -->
+    <circle cx="28" cy="75" r="10" fill="#1f2937"/>
+    <circle cx="28" cy="75" r="5" fill="#9ca3af"/>
+    <circle cx="55" cy="75" r="10" fill="#1f2937"/>
+    <circle cx="55" cy="75" r="5" fill="#9ca3af"/>
+    <!-- Excavator arm -->
+    <rect x="65" y="25" width="8" height="30" rx="2" transform="rotate(30 69 40)"/>
+    <rect x="75" y="15" width="6" height="25" rx="2" transform="rotate(-20 78 27)"/>
+    <!-- Bucket -->
+    <path d="M85 20 L95 30 L90 35 L80 25 Z" fill="white"/>
+  </g>
+</svg>

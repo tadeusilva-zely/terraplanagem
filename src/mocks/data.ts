@@ -1,0 +1,266 @@
+import type { Usuario, Maquina, RegistroHoras, Manutencao, Obra } from '../types';
+
+// Usuários mockados
+export const usuariosMock: Usuario[] = [
+  {
+    id: '1',
+    nome: 'Administrador',
+    pin: '1234',
+    perfil: 'admin',
+    ativo: true,
+    criadoEm: '2024-01-01T00:00:00Z',
+  },
+  {
+    id: '2',
+    nome: 'João Silva',
+    pin: '1111',
+    perfil: 'operador',
+    ativo: true,
+    criadoEm: '2024-01-15T00:00:00Z',
+  },
+  {
+    id: '3',
+    nome: 'Carlos Santos',
+    pin: '2222',
+    perfil: 'operador',
+    ativo: true,
+    criadoEm: '2024-02-01T00:00:00Z',
+  },
+  {
+    id: '4',
+    nome: 'Pedro Oliveira',
+    pin: '3333',
+    perfil: 'operador',
+    ativo: false,
+    criadoEm: '2024-02-10T00:00:00Z',
+  },
+];
+
+// Máquinas mockadas
+export const maquinasMock: Maquina[] = [
+  {
+    id: '1',
+    nome: 'Escavadeira CAT 320',
+    tipo: 'escavadeira',
+    placa: 'ABC-1234',
+    patrimonio: 'PAT-001',
+    horimetroInicial: 1500,
+    horimetroAtual: 2350,
+    ativa: true,
+    criadoEm: '2024-01-01T00:00:00Z',
+  },
+  {
+    id: '2',
+    nome: 'Retroescavadeira JCB 3CX',
+    tipo: 'retroescavadeira',
+    placa: 'DEF-5678',
+    patrimonio: 'PAT-002',
+    horimetroInicial: 800,
+    horimetroAtual: 1250,
+    ativa: true,
+    criadoEm: '2024-01-15T00:00:00Z',
+  },
+  {
+    id: '3',
+    nome: 'Pá Carregadeira Volvo L90',
+    tipo: 'pa-carregadeira',
+    placa: 'GHI-9012',
+    patrimonio: 'PAT-003',
+    horimetroInicial: 2000,
+    horimetroAtual: 3100,
+    ativa: true,
+    criadoEm: '2024-02-01T00:00:00Z',
+  },
+  {
+    id: '4',
+    nome: 'Trator de Esteira D6',
+    tipo: 'trator-esteira',
+    placa: 'JKL-3456',
+    patrimonio: 'PAT-004',
+    horimetroInicial: 500,
+    horimetroAtual: 890,
+    ativa: true,
+    criadoEm: '2024-02-15T00:00:00Z',
+  },
+  {
+    id: '5',
+    nome: 'Motoniveladora CAT 140',
+    tipo: 'motoniveladora',
+    placa: 'MNO-7890',
+    patrimonio: 'PAT-005',
+    horimetroInicial: 3000,
+    horimetroAtual: 4200,
+    ativa: false,
+    criadoEm: '2024-03-01T00:00:00Z',
+  },
+  {
+    id: '6',
+    nome: 'Rolo Compactador Dynapac',
+    tipo: 'rolo-compactador',
+    placa: 'PQR-1234',
+    patrimonio: 'PAT-006',
+    horimetroInicial: 600,
+    horimetroAtual: 950,
+    ativa: true,
+    criadoEm: '2024-03-15T00:00:00Z',
+  },
+];
+
+// Obras mockadas
+export const obrasMock: Obra[] = [
+  { id: '1', nome: 'Loteamento Jardim das Flores', endereco: 'Rua das Flores, 100', ativa: true },
+  { id: '2', nome: 'Terraplanagem Ind. Norte', endereco: 'Rod. BR-101, Km 50', ativa: true },
+  { id: '3', nome: 'Condomínio Solar', endereco: 'Av. Principal, 500', ativa: true },
+  { id: '4', nome: 'Estrada Rural Municipal', endereco: 'Zona Rural', ativa: false },
+];
+
+// Função para gerar datas dos últimos dias
+const diasAtras = (dias: number): string => {
+  const data = new Date();
+  data.setDate(data.getDate() - dias);
+  return data.toISOString();
+};
+
+// Registros de horas mockados
+export const registrosHorasMock: RegistroHoras[] = [
+  {
+    id: '1',
+    maquinaId: '1',
+    operadorId: '2',
+    obra: 'Loteamento Jardim das Flores',
+    dataInicio: diasAtras(0).replace('T', ' ').substring(0, 10) + ' 07:00',
+    dataFim: diasAtras(0).replace('T', ' ').substring(0, 10) + ' 12:00',
+    horimetroInicio: 2340,
+    horimetroFim: 2345,
+    horasTrabalhadas: 5,
+    observacoes: 'Escavação para fundação',
+    criadoEm: diasAtras(0),
+  },
+  {
+    id: '2',
+    maquinaId: '1',
+    operadorId: '2',
+    obra: 'Loteamento Jardim das Flores',
+    dataInicio: diasAtras(0).replace('T', ' ').substring(0, 10) + ' 13:00',
+    dataFim: diasAtras(0).replace('T', ' ').substring(0, 10) + ' 17:00',
+    horimetroInicio: 2345,
+    horimetroFim: 2350,
+    horasTrabalhadas: 4,
+    criadoEm: diasAtras(0),
+  },
+  {
+    id: '3',
+    maquinaId: '2',
+    operadorId: '3',
+    obra: 'Terraplanagem Ind. Norte',
+    dataInicio: diasAtras(1).replace('T', ' ').substring(0, 10) + ' 08:00',
+    dataFim: diasAtras(1).replace('T', ' ').substring(0, 10) + ' 16:00',
+    horimetroInicio: 1240,
+    horimetroFim: 1250,
+    horasTrabalhadas: 8,
+    observacoes: 'Preparação do terreno',
+    criadoEm: diasAtras(1),
+  },
+  {
+    id: '4',
+    maquinaId: '3',
+    operadorId: '2',
+    obra: 'Condomínio Solar',
+    dataInicio: diasAtras(2).replace('T', ' ').substring(0, 10) + ' 07:30',
+    dataFim: diasAtras(2).replace('T', ' ').substring(0, 10) + ' 15:30',
+    horimetroInicio: 3090,
+    horimetroFim: 3100,
+    horasTrabalhadas: 8,
+    criadoEm: diasAtras(2),
+  },
+  {
+    id: '5',
+    maquinaId: '4',
+    operadorId: '3',
+    obra: 'Terraplanagem Ind. Norte',
+    dataInicio: diasAtras(3).replace('T', ' ').substring(0, 10) + ' 06:00',
+    dataFim: diasAtras(3).replace('T', ' ').substring(0, 10) + ' 14:00',
+    horimetroInicio: 880,
+    horimetroFim: 890,
+    horasTrabalhadas: 8,
+    observacoes: 'Nivelamento geral',
+    criadoEm: diasAtras(3),
+  },
+];
+
+// Manutenções mockadas
+export const manutencoesMock: Manutencao[] = [
+  {
+    id: '1',
+    maquinaId: '1',
+    tipo: 'preventiva',
+    data: diasAtras(30),
+    horimetro: 2300,
+    descricao: 'Troca de óleo e filtros',
+    pecas: 'Óleo 15W40 20L, Filtro de óleo, Filtro de ar',
+    custo: 850,
+    proximaManutencaoHoras: 2550,
+    status: 'realizada',
+    criadoEm: diasAtras(30),
+  },
+  {
+    id: '2',
+    maquinaId: '2',
+    tipo: 'corretiva',
+    data: diasAtras(15),
+    horimetro: 1200,
+    descricao: 'Reparo no sistema hidráulico',
+    pecas: 'Mangueira hidráulica, Conexões',
+    custo: 1200,
+    status: 'realizada',
+    criadoEm: diasAtras(15),
+  },
+  {
+    id: '3',
+    maquinaId: '3',
+    tipo: 'preventiva',
+    data: diasAtras(5),
+    horimetro: 3100,
+    descricao: 'Revisão de 500 horas',
+    pecas: 'Kit filtros, Óleo',
+    custo: 1500,
+    proximaManutencaoHoras: 3600,
+    status: 'realizada',
+    criadoEm: diasAtras(5),
+  },
+  {
+    id: '4',
+    maquinaId: '1',
+    tipo: 'preventiva',
+    data: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+    horimetro: 2550,
+    descricao: 'Troca de óleo programada',
+    proximaManutencaoHoras: 2550,
+    status: 'pendente',
+    criadoEm: diasAtras(2),
+  },
+  {
+    id: '5',
+    maquinaId: '6',
+    tipo: 'preventiva',
+    data: diasAtras(2),
+    horimetro: 1000,
+    descricao: 'Lubrificação geral e verificação',
+    proximaManutencaoHoras: 1000,
+    status: 'atrasada',
+    criadoEm: diasAtras(10),
+  },
+];
+
+// Labels para tipos de máquinas
+export const tipoMaquinaLabels: Record<string, string> = {
+  'escavadeira': 'Escavadeira',
+  'retroescavadeira': 'Retroescavadeira',
+  'pa-carregadeira': 'Pá Carregadeira',
+  'trator-esteira': 'Trator de Esteira',
+  'motoniveladora': 'Motoniveladora',
+  'rolo-compactador': 'Rolo Compactador',
+  'caminhao-basculante': 'Caminhão Basculante',
+  'caminhao-pipa': 'Caminhão Pipa',
+  'outro': 'Outro',
+};
